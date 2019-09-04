@@ -110,6 +110,7 @@ org.authenticate({ username, password, securityToken }, (err, oauth) => {
 
   api_str.on("data", function(data) {
     console.log("Received API event");
+    if (verbose) { stream.emit("data", data)} else {
     let output = {payload: {
         EventData: data.payload.EventDate,
         ConnectedAppId: data.payload.ConnectedAppId,
@@ -118,6 +119,7 @@ org.authenticate({ username, password, securityToken }, (err, oauth) => {
         Username: data.payload.Username
     }};
     stream.emit("data", output);
+    }
 });
   uri_str.on("data", function(data) {
     console.log("Received URIevent");
